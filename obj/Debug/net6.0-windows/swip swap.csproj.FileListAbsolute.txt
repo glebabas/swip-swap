@@ -35,3 +35,4 @@ D:\Users\Gleb\Desktop\swip swap\swip swap\obj\Debug\net6.0-windows\refint\swip s
 D:\Users\Gleb\Desktop\swip swap\swip swap\obj\Debug\net6.0-windows\swip swap.pdb
 D:\Users\Gleb\Desktop\swip swap\swip swap\obj\Debug\net6.0-windows\swip swap.genruntimeconfig.cache
 D:\Users\Gleb\Desktop\swip swap\swip swap\obj\Debug\net6.0-windows\ref\swip swap.dll
+D:\Users\Gleb\Desktop\swip swap\swip swap\bin\Debug\net6.0-windows\Content\scottpilgrim_multiple.xnb

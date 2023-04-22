@@ -6,46 +6,90 @@ namespace swip_swap
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+        Texture2D texture;
+        Vector2 position = Vector2.Zero;
+        float speed = 5f;
+
+
+        bool inverse = false;
+
+        int frameWidth = 108;
+        int frameHeight = 140;
+        Point currentFrame = new Point(0, 0);
+        Point spriteSize = new Point(8, 2);
+
+
+
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            texture = Content.Load<Texture2D>("scottpilgrim_multiple");
         }
 
+     
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            KeyboardState keyboardState = Keyboard.GetState();
 
-            // TODO: Add your update logic here
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.Escape))
+                Exit();
+     
+           
+
+            if (keyboardState.IsKeyDown(Keys.Left))
+            {
+                position.X -= speed;
+             
+            }
+
+            if (keyboardState.IsKeyDown(Keys.Right)) 
+            {
+                position.X += speed;
+              
+            }
+               
+            if (keyboardState.IsKeyDown(Keys.Up))
+                position.Y -= speed;
+            if (keyboardState.IsKeyDown(Keys.Down))
+                position.Y += speed;
+
+            if (keyboardState.IsKeyDown(Keys.V))
+            {
+                inverse = !inverse;
+            }
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(inverse ? Color.Black : Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
 
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+
+            spriteBatch.Draw(texture, position,
+                new Rectangle(currentFrame.X * frameWidth,
+                    currentFrame.Y * frameHeight,
+                    frameWidth, frameHeight),
+                Color.White, 0, Vector2.Zero,
+                1, SpriteEffects.None, 0);
+
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
